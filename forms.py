@@ -23,7 +23,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=valid_pword)
     passwordCheck = PasswordField('Password confirmation', validators=[EqualTo('password')])
 
-    submit = SubmitField('Register')
+    submit = SubmitField('Log in')
 
 
 def authenticate_user(fname, lname, email, pword):
@@ -50,7 +50,7 @@ def index():
 
 
 @app.route('/register', methods=['GET', 'POST'])
-def login():
+def register():
     register_form = LoginForm()
 
     if register_form.validate_on_submit():
@@ -64,6 +64,22 @@ def login():
         return redirect(url_for('confirmation'))
 
     return render_template('register.html', form=register_form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    register_form = LoginForm()
+
+    if register_form.validate_on_submit():
+        ##if not authenticate_user(register_form.firstName.data, register_form.lastName.data, register_form.email.data, register_form.password.data):
+        ##   flash('There are errors in your registration form:')
+        ##else:
+        session['firstName'] = register_form.firstName.data
+        session['email'] = register_form.email.data
+
+        flash('User logged in')
+        return redirect(url_for('confirmation'))
+
+    return render_template('login.html', form=register_form)
 
 
 @app.route('/logout')
