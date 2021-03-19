@@ -74,5 +74,4 @@ def logout():
     flash('Logged out')
     return redirect(url_for('index'))
 
-
 app.run(debug=True)
