@@ -8,6 +8,7 @@
         <p>Logged in as {{ session.email }}; <a href="/logout">log out</a>.</p>
     {% else %}
         <p>New User? <a href="/register">Register here</a>.</p>
+        <p>Already a member? <a href="/login">Log in</a>.</p>
     {% endif %}
 
 {% endblock %}
