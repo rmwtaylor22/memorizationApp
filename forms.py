@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key for session application'
 
 
-class LoginForm(FlaskForm):
+class RegisterForm(FlaskForm):
     valid_pword = []
     valid_pword.append(Length(min=8))
     valid_pword.append(Regexp(r'.*[A-Za-z]', message="Password must have at least one letter"))
@@ -28,22 +28,28 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log in')
 
 
-def authenticate_user(fname, lname, email, pword):
-    if len(fname) < 5:
-        return False
+class LoginForm(FlaskForm):
+    valid_pword = []
+    email = StringField('Email', validators=[Email()])
+    password = PasswordField('Password', validators=valid_pword)
 
-    if len(lname) < 5:
-        return False
+    submit = SubmitField('Log in')
 
-    ## fake_user_database = {}
-    ## fake_user_database['ds@cse.taylor.edu'] = 'Pa$$word123'
-    ## fake_user_database['bnroller@taylor.edu'] = 'Gr3atteach!'
 
-    # if email in db.login(email):
-    #    if db[email] == pword:  ## how do I do this?
-    #        return True
-
+def authenticate_user(email, pword):
+    thepw = db.passw_check(email)
+    if thepw[0] == pword:
+        return True
     return False
+
+@app.before_request
+def before_request():
+    db.open_db_connection()
+
+
+@app.teardown_request
+def teardown_request(exception):
+    db.close_db_connection()
 
 
 @app.route('/')
@@ -54,7 +60,7 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # provide user a login form
-    register_form = LoginForm()
+    register_form = RegisterForm()
 
     # if the info is valid
     if register_form.validate_on_submit():
@@ -64,8 +70,8 @@ def register():
             flash("Member {} already exists".format(register_form.email.data))
         else:
             rowcount = db.create_member(register_form.email.data,
-                                        register_form.first_name.data,
-                                        register_form.last_name.data,
+                                        register_form.firstName.data,
+                                        register_form.lastName.data,
                                         register_form.password.data)
 
             if rowcount == 1:
@@ -86,27 +92,29 @@ def register():
 
 
 # @app.route('/login', methods=['GET', 'POST'])
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
     # if the info is valid
     if login_form.validate_on_submit():
         member = db.find_member(login_form.email.data)
-
         if member is None:
             flash("Member {} does not exist".format(login_form.email.data))
         else:
-            # fill the session in with the details
-            session['firstName'] = login_form.firstName.data
-            session['lastName'] = login_form.lastName.data
-            session['email'] = login_form.email.data
-            session['password'] = login_form.password.data
+            if authenticate_user(login_form.email.data, login_form.password.data):
+                # fill the session in with the details
+                session['firstName'] = member[1]
+                session['lastName'] = member[2]
+                session['email'] = login_form.email.data
+                session['password'] = login_form.password.data
 
-            flash("Member {} logged in".format(login_form.email.data))
-            return redirect(url_for('index'))
+                flash("Member {} logged in".format(member[1]))
+                return redirect(url_for('index'))
+            else:
+                flash("The password does not match the username".format(login_form.email.data))
 
-        flash('User logged in')
-        return redirect(url_for('confirmation'))
+        # flash('User logged in')
+        # return redirect(url_for('confirmation'))
 
     return render_template('login.html', form=login_form)
 

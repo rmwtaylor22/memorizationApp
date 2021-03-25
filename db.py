@@ -17,9 +17,8 @@ def close_db_connection():
 
 def find_member(memberEmail):
     query = """
-    SELECT m.email, m.first_name, m.last_name, p.file_path
-    FROM member AS m
-       LEFT OUTER JOIN photo AS p ON m.email = p.member_email 
+    SELECT email, first_name, last_name, password
+    FROM team.member
     WHERE email = %(emailParam)s
     """
     g.cursor.execute(query, {'emailParam': memberEmail})
@@ -28,10 +27,25 @@ def find_member(memberEmail):
 
 def create_member(email, first_name, last_name, password):
     query = '''
-    INSERT INTO member (email, first_name, last_name, password)
+    INSERT INTO team.member (email, first_name, last_name, password)
     VALUES (%(email)s, %(first)s, %(last)s, %(pass)s)
     '''
 
     g.cursor.execute(query, {'email': email, 'first': first_name, 'last': last_name, 'pass': password})
     g.connection.commit()
     return g.cursor.rowcount
+
+
+def passw_check(memberEmail):
+    query = """
+    SELECT password
+    FROM team.member
+    WHERE email = %(emailParam)s
+    """
+    g.cursor.execute(query, {'emailParam': memberEmail})
+    return g.cursor.fetchone()
+
+    #return query
+
+    # g.cursor.execute(query, {'emailParam': memberEmail})
+    # return g.cursor.fetchone()
