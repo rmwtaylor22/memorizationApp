@@ -7,8 +7,9 @@
     {% if 'email' in session %}
         <p>Logged in as {{ session.email }}; <a href="/logout">log out</a>.</p>
     {% else %}
-        <p>New User? <a href="/register">Register here</a>.</p>
-        <p>Already a member? <a href="/login">Log in</a>.</p>
+        <p>New User?  <button type="button"><a href="/register">Register here</a></button></p>
+        <p>Already a member? <button type="button"><a href="/login">Log in</a></button></p>
     {% endif %}
+
 
 {% endblock %}
