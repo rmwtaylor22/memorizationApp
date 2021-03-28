@@ -1,0 +1,20 @@
+@import "forms.py"
+
+$base1: #484A47;
+$base2: #5C6D70;
+$accent1: #A3774;
+$accent2: #E88873;
+$accent3: E0AC9D;
+
+.alpha { color: $base1; }
+.beta {
+  color: $yellow-300;
+  background-color: $indigo-900;
+}
+$theme-colors: (
+  "base1": $base1,
+  "base2": $base2,
+  "accent1": $accent1,
+  "accent2": $accent2,
+  "accent3": $accent3
+);
