@@ -122,6 +122,10 @@ def login():
 def verse_selection():
     return render_template('verse_selection.html')
 
+@app.route('/module_selection')
+def module_selection():
+    return render_template('module_selection.html')
+
 
 @app.route('/logout')
 def logout():
