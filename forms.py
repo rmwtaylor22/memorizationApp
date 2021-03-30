@@ -118,6 +118,10 @@ def login():
 
     return render_template('login.html', form=login_form)
 
+@app.route('/verse_selection')
+def verse_selection():
+    return render_template('verse_selection.html')
+
 
 @app.route('/logout')
 def logout():
