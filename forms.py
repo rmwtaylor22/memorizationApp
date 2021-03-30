@@ -51,10 +51,29 @@ def before_request():
 def teardown_request(exception):
     db.close_db_connection()
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/activities')
+def activities():
+    return render_template('activities.html')
+
+@app.route('/modules')
+def modules():
+    return render_template('modules.html')
+
+@app.route('/friends')
+def friends():
+    return render_template('friends.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -91,7 +110,6 @@ def register():
     return render_template('register.html', form=register_form)
 
 
-# @app.route('/login', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
@@ -107,14 +125,10 @@ def login():
                 session['lastName'] = member[2]
                 session['email'] = login_form.email.data
                 session['password'] = login_form.password.data
-
-                flash("Member {} logged in".format(member[1]))
-                return redirect(url_for('index'))
             else:
                 flash("The password does not match the username".format(login_form.email.data))
 
-        # flash('User logged in')
-        # return redirect(url_for('confirmation'))
+        return redirect(url_for('home'))
 
     return render_template('login.html', form=login_form)
 
@@ -126,6 +140,43 @@ def verse_selection():
 def module_selection():
     return render_template('module_selection.html')
 
+
+# @app.route("/update", methods=["POST"])
+# def update():
+#     # provide user a login form
+#     member = db;
+#     update_form = RegisterForm()
+#
+#     # if the info is valid
+#     if update_form.validate_on_submit():
+#         else:
+#             rowcount = db.update(update_form.email.data,
+#                                         update_form.firstName.data,
+#                                         update_form.lastName.data,
+#                                         update_form.password.data)
+#
+#             if rowcount == 1:
+#                 flash("Member {} updated".format(update_form.email.data))
+#                 return redirect(url_for('index'))
+#             else:
+#                 flash("New member not created")
+#             # fill the session in with the details
+#             session['firstName'] = update_form.firstName.data
+#             session['lastName'] = update_form.lastName.data
+#             session['email'] = update_form.email.data
+#             session['password'] = update_form.password.data
+#
+#         flash('User updated')
+#         return redirect(url_for('confirmation'))
+#
+#     return render_template('register.html', form=update_form)
+#
+#     oldFirst = request.form.get("newtitle")
+#     newFirst = request.form.get("oldtitle")
+#     book = Book.query.filter_by(title=oldtitle).first()
+#     book.title = newtitle
+#     db.session.commit()
+#     return redirect("/")
 
 @app.route('/logout')
 def logout():
