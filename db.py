@@ -45,7 +45,11 @@ def passw_check(memberEmail):
     g.cursor.execute(query, {'emailParam': memberEmail})
     return g.cursor.fetchone()
 
-    #return query
-
-    # g.cursor.execute(query, {'emailParam': memberEmail})
-    # return g.cursor.fetchone()
+def update(memberEmail):
+    query = """
+    SELECT password
+    FROM team.member
+    WHERE email = %(emailParam)s
+    """
+    g.cursor.execute(query, {'emailParam': memberEmail})
+    return g.cursor.fetchone()

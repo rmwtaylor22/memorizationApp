@@ -6,9 +6,9 @@
 
     {% if 'email' in session %}
         <p>Logged in as {{ session.email }}; <a href="/logout">Log out</a>.</p>
-    {% else %}
         <p>Congrats, you're registered to Pika! Now you can start Bible memorizing!</p>
         <p>Start learning below. </p>
+    {% else %}
     {% endif %}
 
 {% endblock %}

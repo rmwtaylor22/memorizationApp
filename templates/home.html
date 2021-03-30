@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+    {% if 'firstName' in session %}
+        <p>Welcome {{ session.firstName }}! What will you learn today?</p>
+        <p>Current streak: 5 days</p>
+        <br>
+        <p><a href="/modules">Modules</a></p>
+        <p><a href="/friends">Friends</a></p>
+        <p><a href="/activities">Activities</a></p>
+        <p><a href="/profile">Profile</a></p>
+        <br>
+        <p><a href="/logout">Log out</a></p>
+    {% else %}
+        <p>Error loading session info. Please contact app developers. <a href="/logout">Log out</a>.</p>
+    {% endif %}
+
+{% endblock %}
