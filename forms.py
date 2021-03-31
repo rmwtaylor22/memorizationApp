@@ -6,6 +6,40 @@ from wtforms.validators import Email, Length, Regexp, EqualTo
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key for session application'
 
+class Placeholder(FlaskForm):
+
+    long = []
+    long.append(Length(min=3))
+    firstBlank= StringField('First blank', validators=long)
+    secondBlank = StringField('Second blank', validators=long)
+    thirdBlank = StringField('Third blank', validators=long)
+    forthBlank = StringField('Forth blank', validators=long)
+    fifthBlank = StringField('Fifth blank', validators=long)
+
+    submit = SubmitField('All filled in!')
+
+
+@app.route('/Test', methods=['GET', 'POST'])
+def test():
+    return render_template('testmodulespage.html')
+
+@app.route('/Placeholder', methods=['GET', 'POST'])
+def placeholder():
+    placeholder_form = Placeholder()
+
+    if placeholder_form.validate_on_submit():
+        # this is supposed to send the information in the forms to
+        # the database right now it is displaying the information at
+        # the bottom of the website.
+        session['firstBlank'] = placeholder_form.firstBlank.data
+        session['secondBlank'] = placeholder_form.secondBlank.data
+
+        flash('User reached ???')
+        return redirect(url_for('test'))
+
+    return render_template('placeholder.html', form=placeholder_form)
+
+
 
 class LoginForm(FlaskForm):
     valid_pword = []
@@ -61,7 +95,7 @@ def register():
         session['email'] = register_form.email.data
 
         flash('User registered')
-        return redirect(url_for('confirmation'))
+        return redirect(url_for('confirmation.html'))
 
     return render_template('register.html', form=register_form)
 
@@ -77,7 +111,7 @@ def login():
         session['email'] = register_form.email.data
 
         flash('User logged in')
-        return redirect(url_for('confirmation'))
+        return redirect(url_for('confirmation.html'))
 
     return render_template('login.html', form=register_form)
 
