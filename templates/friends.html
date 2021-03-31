@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Friends{% endblock %}
+
+{% block content %}
+    <h1>My Friends List</h1>
+    <table class="table table-striped table-hover table-sm">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for lst in friends_list %}
+            <tr>
+                <td>{{ lst.Name }}</td>
+                <td>{{ lst.UserName }}</td>
+            </tr>
+        {%  endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
