@@ -19,13 +19,13 @@ class RegisterForm(FlaskForm):
     long = []
     long.append(Length(min=4))
 
-    firstName = StringField('First Name', validators=long)
-    lastName = StringField('Last Name', validators=long)
-    email = StringField('Email', validators=[Email()])
-    password = PasswordField('Password', validators=valid_pword)
+    firstName = StringField('Update First Name', validators=long)
+    lastName = StringField('Update Last Name', validators=long)
+    email = StringField('Update Email', validators=[Email()])
+    password = PasswordField('Update Password', validators=valid_pword)
     passwordCheck = PasswordField('Password confirmation', validators=[EqualTo('password')])
 
-    submit = SubmitField('Log in')
+    submit = SubmitField('Update')
 
 
 class LoginForm(FlaskForm):
@@ -42,6 +42,7 @@ def authenticate_user(email, pword):
         return True
     return False
 
+
 @app.before_request
 def before_request():
     db.open_db_connection()
@@ -51,25 +52,31 @@ def before_request():
 def teardown_request(exception):
     db.close_db_connection()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/home')
 def home():
     return render_template('home.html')
 
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
 
 @app.route('/activities')
 def activities():
     return render_template('activities.html')
 
+
 @app.route('/modules')
 def modules():
     return render_template('modules.html')
+
 
 @app.route('/friends')
 def friends():
@@ -132,51 +139,45 @@ def login():
 
     return render_template('login.html', form=login_form)
 
+
 @app.route('/verse_selection')
 def verse_selection():
     return render_template('verse_selection.html')
+
 
 @app.route('/module_selection')
 def module_selection():
     return render_template('module_selection.html')
 
 
-# @app.route("/update", methods=["POST"])
-# def update():
-#     # provide user a login form
-#     member = db;
-#     update_form = RegisterForm()
-#
-#     # if the info is valid
-#     if update_form.validate_on_submit():
-#         else:
-#             rowcount = db.update(update_form.email.data,
-#                                         update_form.firstName.data,
-#                                         update_form.lastName.data,
-#                                         update_form.password.data)
-#
-#             if rowcount == 1:
-#                 flash("Member {} updated".format(update_form.email.data))
-#                 return redirect(url_for('index'))
-#             else:
-#                 flash("New member not created")
-#             # fill the session in with the details
-#             session['firstName'] = update_form.firstName.data
-#             session['lastName'] = update_form.lastName.data
-#             session['email'] = update_form.email.data
-#             session['password'] = update_form.password.data
-#
-#         flash('User updated')
-#         return redirect(url_for('confirmation'))
-#
-#     return render_template('register.html', form=update_form)
-#
-#     oldFirst = request.form.get("newtitle")
-#     newFirst = request.form.get("oldtitle")
-#     book = Book.query.filter_by(title=oldtitle).first()
-#     book.title = newtitle
-#     db.session.commit()
-#     return redirect("/")
+@app.route("/update", methods=['GET', 'POST'])
+def update():
+    update_form = RegisterForm()
+
+    # if the info is valid
+    if update_form.validate_on_submit():
+        rowcount = db.update(update_form.email.data,
+                             update_form.firstName.data,
+                             update_form.lastName.data,
+                             update_form.password.data)
+
+        if rowcount is None:
+            flash("Member {} updated".format(update_form.email.data))
+            return redirect(url_for('index'))
+        else:
+            flash("New member not created")
+
+        # fill the session in with the details
+        session['firstName'] = update_form.firstName.data
+        session['lastName'] = update_form.lastName.data
+        session['email'] = update_form.email.data
+        session['password'] = update_form.password.data
+
+        flash('User updated')
+        return redirect(url_for('profile'))
+
+    return render_template('update.html', form=update_form)
+
 
 @app.route('/logout')
 def logout():
@@ -185,5 +186,6 @@ def logout():
 
     flash('Logged out')
     return redirect(url_for('index'))
+
 
 app.run(debug=True)
