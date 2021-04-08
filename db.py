@@ -45,18 +45,19 @@ def passw_check(memberEmail):
     g.cursor.execute(query, {'emailParam': memberEmail})
     return g.cursor.fetchone()
 
-def update(memberEmail):
+
+def update(memberEmail, fn, ln, psw):
     query = """
-    SELECT password
-    FROM team.member
-    WHERE email = %(emailParam)s
-    
-    UPDATE email, password, firstName, lastName
-    SET email = memberEmail
+    UPDATE team.member
+    SET email = %(emailParam)s,
+        first_name = %(fnParam)s,
+        last_name = %(lnParam)s,
+        password = %(pswParam)s
     WHERE email = %(emailParam)s
     """
-    g.cursor.execute(query, {'emailParam': memberEmail})
-    return g.cursor.fetchone()
+    g.cursor.execute(query, {'emailParam': memberEmail, 'fnParam': fn, 'lnParam': ln, 'pswParam': psw})
+    g.connection.commit()
+    return g.cursor.rowcount
 
 # Went to the following link for SQL update examples
 # https://www.zentut.com/sql-tutorial/sql-update/#:~:text=%20To%20update%20data%20in%20a%20table%2C%20you,optional.%20If%20you%20omit%20the%20WHERE...%20More%20
