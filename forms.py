@@ -78,7 +78,9 @@ def verses():
 
 @app.route('/friends')
 def friends():
-    return render_template('friends.html')
+    results=db.friends()
+    print(results)
+    return render_template('friends.html',friends=results )
 
 
 @app.route('/register', methods=['GET', 'POST'])

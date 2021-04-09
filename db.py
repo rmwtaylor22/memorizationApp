@@ -14,6 +14,12 @@ def close_db_connection():
     g.cursor.close()
     g.connection.close()
 
+def friends():
+    query = """
+    SELECT * FROM friends_list
+        """
+    g.cursor.execute(query)
+    return g.cursor.fetchall()
 
 def find_member(memberEmail):
     query = """
