@@ -19,10 +19,10 @@ class RegisterForm(FlaskForm):
     long = []
     long.append(Length(min=4))
 
-    firstName = StringField('Update First Name', validators=long)
-    lastName = StringField('Update Last Name', validators=long)
-    email = StringField('Update Email', validators=[Email()])
-    password = PasswordField('Update Password', validators=valid_pword)
+    firstName = StringField('First Name', validators=long)
+    lastName = StringField('Last Name', validators=long)
+    email = StringField('Email', validators=[Email()])
+    password = PasswordField('Password', validators=valid_pword)
     passwordCheck = PasswordField('Password confirmation', validators=[EqualTo('password')])
 
     submit = SubmitField('Update')

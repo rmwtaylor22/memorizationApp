@@ -18,7 +18,7 @@ def close_db_connection():
 def find_member(memberEmail):
     query = """
     SELECT email, first_name, last_name, password
-    FROM team.member
+    FROM member
     WHERE email = %(emailParam)s
     """
     g.cursor.execute(query, {'emailParam': memberEmail})
@@ -27,7 +27,7 @@ def find_member(memberEmail):
 
 def create_member(email, first_name, last_name, password):
     query = '''
-    INSERT INTO team.member (email, first_name, last_name, password)
+    INSERT INTO member (email, first_name, last_name, password)
     VALUES (%(email)s, %(first)s, %(last)s, %(pass)s)
     '''
 
@@ -39,7 +39,7 @@ def create_member(email, first_name, last_name, password):
 def passw_check(memberEmail):
     query = """
     SELECT password
-    FROM team.member
+    FROM member
     WHERE email = %(emailParam)s
     """
     g.cursor.execute(query, {'emailParam': memberEmail})
@@ -48,7 +48,7 @@ def passw_check(memberEmail):
 
 def update(memberEmail, fn, ln, psw):
     query = """
-    UPDATE team.member
+    UPDATE member
     SET email = %(emailParam)s,
         first_name = %(fnParam)s,
         last_name = %(lnParam)s,
