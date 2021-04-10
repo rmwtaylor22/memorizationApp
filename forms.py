@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, render_template, flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import Email, Length, Regexp, EqualTo
 
 import db  # if error, right-click parent directory "mark directory as" "sources root"
