@@ -1,7 +1,7 @@
 from flask import Flask, session, redirect, url_for, render_template, flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, PasswordField
-from wtforms.validators import Email, Length, Regexp, EqualTo
+from wtforms import StringField, SubmitField, BooleanField, PasswordField, SelectField
+from wtforms.validators import Email, Length, Regexp, EqualTo, DataRequired
 
 import db  # if error, right-click parent directory "mark directory as" "sources root"
 
@@ -34,6 +34,42 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=valid_pword)
 
     submit = SubmitField('Log in')
+
+
+class VerseForm(FlaskForm):
+    book = SelectField(
+        'Book',
+        [DataRequired()],
+        choices=[
+            ('Genesis', 'gen'),
+            ('Exodus', 'exo'),
+            ('Leviticus', 'lev'),
+            ('Numbers', 'num'),
+            ('Deuteronomy', 'duet'),
+            ('Joshua', 'jos')
+        ]
+    )
+
+    chapter = SelectField(
+        'Chapter',
+        [DataRequired()],
+        choices=[
+            ('1', '.1'),
+            ('2', '.2'),
+            ('3', '.3')
+        ]
+    )
+
+    verse = SelectField(
+        'Verse',
+        [DataRequired()],
+        choices=[
+            ('1', '.1'),
+            ('2', '.2'),
+            ('3', '.3')
+        ]
+    )
+    submit = SubmitField('Submit')
 
 
 def authenticate_user(email, pword):
@@ -82,39 +118,39 @@ def modules():
 def friends():
     return render_template('friends.html')
 
+@app.route('/selectVerse', methods=['GET'])
+def dropdown():
+    colours = ['Red', 'Blue', 'Black', 'Orange']
+    return render_template('test.html', colours=colours)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # provide user a login form
-    register_form = RegisterForm()
+    signup_form = RegisterForm()
 
     # if the info is valid
-    if register_form.validate_on_submit():
-        member = db.find_member(register_form.email.data)
+    if signup_form.validate_on_submit():
+        member = db.find_member(signup_form.email.data)
 
         if member is not None:
-            flash("Member {} already exists".format(register_form.email.data))
+            flash("Member {} already exists".format(signup_form.email.data))
         else:
-            rowcount = db.create_member(register_form.email.data,
-                                        register_form.firstName.data,
-                                        register_form.lastName.data,
-                                        register_form.password.data)
+            rowcount = db.create_member(signup_form.email.data,
+                                        signup_form.firstName.data,
+                                        signup_form.lastName.data,
+                                        signup_form.password.data)
 
             if rowcount == 1:
-                flash("Member {} created".format(register_form.email.data))
+                flash("Member {} created".format(signup_form.email.data))
                 return redirect(url_for('index'))
             else:
                 flash("New member not created")
-            # fill the session in with the details
-            session['firstName'] = register_form.firstName.data
-            session['lastName'] = register_form.lastName.data
-            session['email'] = register_form.email.data
-            session['password'] = register_form.password.data
 
-        flash('User registered')
-        return redirect(url_for('confirmation'))
+        flash('Verse found')
+        return redirect(url_for('home'))
 
-    return render_template('register.html', form=register_form)
+    return render_template('register.html', form=signup_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -142,7 +178,17 @@ def login():
 
 @app.route('/verse_selection')
 def verse_selection():
-    return render_template('verse_selection.html')
+    verse_form = VerseForm()
+    # if the info is valid
+    if verse_form.validate_on_submit():
+        verse = db.find_verse(verse_form.book.data, verse_form.chapter.data, verse_form.verse.data)
+        if verse is None:
+            flash("verse does not exist")
+        else:
+            session['verse'] = verse[1]  # hopefully this returns the text. Might need to use index 0
+        return render_template('verse_selection.html')
+
+    return render_template('login.html', form=verse_form)
 
 
 @app.route('/module_selection')

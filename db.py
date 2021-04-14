@@ -69,3 +69,12 @@ def update(memberEmail, fn, ln, psw):
 # WHERE condition;
 
 # https://www.w3schools.com/SQL/sql_update.asp
+
+def find_verse(bk, chtr, vs):
+    query = """
+        SELECT text
+        FROM bible
+        WHERE book = %(bkParam)s, chapter = %(chtr)s, verse = %(vs)s
+        """
+    g.cursor.execute(query, {'bkParam': bk, 'chParam': chtr, 'vsParam': vs})
+    return g.cursor.fetchone()
