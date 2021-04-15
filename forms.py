@@ -192,12 +192,13 @@ def login():
         member = db.find_member(login_form.email.data)
         if member is None:
             flash("Member {} does not exist".format(login_form.email.data))
+            return redirect(url_for('login'))
         else:
-            if authenticate_user(login_form.email.data, login_form.password.data):
+            if db.matchPassword(member[0], login_form.password.data):
                 # fill the session in with the details
                 session['firstName'] = member[1]
                 session['lastName'] = member[2]
-                session['email'] = login_form.email.data
+                session['email'] = member[0]
                 session['password'] = login_form.password.data
             else:
                 flash("The password does not match the username".format(login_form.email.data))
@@ -263,6 +264,9 @@ def update():
 @app.route('/logout')
 def logout():
     session.pop('email', None)
+    session.pop('password', None)
+    session.pop('firstName', None)
+    session.pop('lastName', None)
     session.pop('remember', None)
 
     flash('Logged out')
