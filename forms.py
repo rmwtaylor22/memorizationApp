@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, url_for, render_template, flash
+from flask import Flask, session, redirect, url_for, render_template, flash, g
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField, SelectField
 from wtforms.validators import Email, Length, Regexp, EqualTo, DataRequired
@@ -41,12 +41,14 @@ class VerseForm(FlaskForm):
         'Book',
         [DataRequired()],
         choices=[
-            ('Genesis', 'gen'),
-            ('Exodus', 'exo'),
-            ('Leviticus', 'lev'),
-            ('Numbers', 'num'),
-            ('Deuteronomy', 'duet'),
-            ('Joshua', 'jos')
+            ('gen', 'Genesis'),
+            ('exo', 'Exodus'),
+            ('lev', 'Leviticus'),
+            ('num', 'Numbers'),
+            ('due', 'Deuteronomy'),
+            ('jos', 'Joshua'),
+            ('rom', 'Romans'),
+            ('1cor', '1 Corinthians')
         ]
     )
 
@@ -54,9 +56,16 @@ class VerseForm(FlaskForm):
         'Chapter',
         [DataRequired()],
         choices=[
-            ('1', '.1'),
-            ('2', '.2'),
-            ('3', '.3')
+            ('.1', '1'),
+            ('.2', '2'),
+            ('.3', '3'),
+            ('.4', '4'),
+            ('.5', '5'),
+            ('.6', '6'),
+            ('.7', '7'),
+            ('.8', '8'),
+            ('.9', '9'),
+            ('.10', '10')
         ]
     )
 
@@ -64,9 +73,37 @@ class VerseForm(FlaskForm):
         'Verse',
         [DataRequired()],
         choices=[
-            ('1', '.1'),
-            ('2', '.2'),
-            ('3', '.3')
+            ('.1', '1'),
+            ('.2', '2'),
+            ('.3', '3'),
+            ('.4', '4'),
+            ('.5', '5'),
+            ('.6', '6'),
+            ('.7', '7'),
+            ('.8', '8'),
+            ('.9', '9'),
+            ('.10', '10'),
+            ('.11', '11'),
+            ('.12', '12'),
+            ('.13', '13'),
+            ('.14', '14'),
+            ('.15', '15'),
+            ('.16', '16'),
+            ('.17', '17'),
+            ('.18', '18'),
+            ('.19', '19'),
+            ('.20', '20'),
+            ('.21', '21'),
+            ('.22', '22'),
+            ('.23', '23'),
+            ('.24', '24'),
+            ('.25', '25'),
+            ('.26', '26'),
+            ('.27', '27'),
+            ('.28', '28'),
+            ('.29', '29'),
+            ('.30', '30'),
+            ('.31', '31')
         ]
     )
     submit = SubmitField('Submit')
@@ -117,12 +154,6 @@ def modules():
 @app.route('/friends')
 def friends():
     return render_template('friends.html')
-
-@app.route('/selectVerse', methods=['GET'])
-def dropdown():
-    colours = ['Red', 'Blue', 'Black', 'Orange']
-    return render_template('test.html', colours=colours)
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -178,6 +209,10 @@ def login():
 
 @app.route('/verse_selection')
 def verse_selection():
+
+    g.cursor.execute('SELECT * FROM bible ORDER BY book')
+    results = g.cursor.fetchall()
+
     verse_form = VerseForm()
     # if the info is valid
     if verse_form.validate_on_submit():
@@ -188,7 +223,7 @@ def verse_selection():
             session['verse'] = verse[1]  # hopefully this returns the text. Might need to use index 0
         return render_template('verse_selection.html')
 
-    return render_template('login.html', form=verse_form)
+    return render_template('versesR.html', form=verse_form, verses=results)
 
 
 @app.route('/module_selection')
