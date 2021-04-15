@@ -139,8 +139,6 @@ def login():
 
     return render_template('login.html', form=login_form)
 
-
-
 # @app.route("/update", methods=["POST"])
 # def update():
 #     # provide user a login form
