@@ -8,14 +8,15 @@
         <p>Welcome {{ session.firstName }}! What will you learn today?</p>
         <p>Current streak: 5 days</p>
         <br>
-        <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/modules'">Modules</button></p>
-        <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/friends'">Friends</button></p>
-        <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/activities'">Activities</button></p>
-        <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/profile'">Profile</button></p>
+        <p><a href="/modules">Modules</a></p>
+        <p><a href="/friends">Friends</a></p>
+        <p><a href="/activities">Activities</a></p>
+        <p><a href="/profile">Profile</a></p>
+        <p><a href="/verse_selection">Verses</a></p>
         <br>
         <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/logout'">Logout</button></p>
     {% else %}
-        <p>Error loading session info. Please contact app developers. <a href="/logout">Log out</a>.</p>
+        <p>Error loading session info. Log out and try again: <a href="/logout">Log out</a>.</p>
     {% endif %}
 
 {% endblock %}

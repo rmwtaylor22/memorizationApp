@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Verses you've been learning{% endblock %}
+
+
+{% block content %}
+    <h1>Collected Verses</h1>
+
+    {% for verse in verses %}
+            <p><strong>{{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}</strong></p>
+            <p>{{ verse.text }}</p>
+            <br>
+        {% else %}
+            <tr>
+                <td colspan="3">No verses</td>
+            </tr>
+        {%  endfor %}
+
+    {% if form.errors %}
+
+        <div class="alert alert-danger">
+        <strong>Problem/s:</strong>
+
+        <ul>
+        {% for field in form.errors %}
+
+                {% for problem in form.errors[field] %}
+                     <li>{{ problem }}</li>
+                {% endfor %}
+
+        {% endfor %}
+        </ul>
+
+        </div>
+    {% endif %}
+    <!-- Display verses in Bible table -->
+    <h2>Add a verse?</h2>
+    <form method="POST">
+
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+        {{ form.book.label }}
+        {{ form.book(class_='form-control') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.chapter.label }}
+        {{ form.chapter(class_='form-control') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.verse.label }}
+        {{ form.verse(class_='form-control') }}
+    </div>
+
+    {{ form.submit(class_="btn btn-primary") }}
+
+    </form>
+
+    <br><br><br>
+    <p><a href="/home">Go back</a></p>
+
+{% endblock %}
