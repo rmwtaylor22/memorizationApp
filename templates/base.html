@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="colors.css">
-
 <style>
-    .button1 {background-color: #4CAF50;}
-    .button2 {background-color: #008cba;}
+.button1 {background-color: #4CAF50;}
+.button2 {background-color: #008cba;}
+
+
 </style>
 
-<head style="color:red">
+<head>
     <meta charset="UTF-8">
     <title>{% block title %}Sessions Example{% endblock %}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,16 +15,11 @@
 <body>
 
 
-
-<div style="color:#5C6D70" class="container">
+<div class="container">
 
     <div class="jumbotron jumbotron-fluid">
         <h1 class="text-center">Welcome to Bible Memorizer</h1>
         <p class="text-center">Team PIKA</p>
-    </div>
-
-    <div class="button1">
-
     </div>
 
     {% for message in get_flashed_messages() %}
@@ -34,29 +29,6 @@
     {% endfor %}
 
     {% block content %}{% endblock %}
-
-
-
-    <div class="card p-4 mt-5">
-
-        <h5 class="card-title">Session Data</h5>
-
-        <div class="card-text">
-            <dl>
-                {% for key in session %}
-
-                    <dt>{{ key }}</dt>
-                    <dd>{{ session[key] }}</dd>
-
-                {% else %}
-
-                    <dt>Session empty</dt>
-
-                {% endfor %}
-            </dl>
-        </div>
-
-    </div>
 
 
 </div>
