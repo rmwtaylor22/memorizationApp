@@ -148,7 +148,12 @@ def activities():
 
 @app.route('/modules')
 def modules():
-    return render_template('modules.html')
+    return render_template('module_selection.html')
+
+
+@app.route('/verse_selection')
+def verse_selection():
+    return render_template('verse_selection.html')
 
 
 @app.route('/friends')
