@@ -73,6 +73,11 @@ def activities():
     return render_template('activities.html')
 
 
+@app.route('/activities_base')
+def activities_base():
+    return render_template('activities_base.html')
+
+
 @app.route('/modules')
 def modules():
     return render_template('module_selection.html')
