@@ -9,21 +9,26 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key for session application'
 
 class Placeholder(FlaskForm):
-
     long = []
     long.append(Length(min=3))
-    firstBlank= StringField('First blank', validators=long)
-    secondBlank = StringField('Second blank', validators=long)
-    thirdBlank = StringField('Third blank', validators=long)
-    forthBlank = StringField('Forth blank', validators=long)
-    fifthBlank = StringField('Fifth blank', validators=long)
+    match=[]
+    match.append(Regexp(r'.*[A-Za-z]')) #add more validators here.
+    #firstBlankAnswer=this needs to be connected to the database's verse blank that gets pulled in to the activity.
+    firstBlank= StringField('First blank', validators=long)#, match, [EqualTo("firstBlankAnswer")])
+    secondBlank = StringField('Second blank', validators=long)#,match,[EqualTo("secondBlankAnswer")])
+    thirdBlank = StringField('Third blank', validators=long)#,match, [EqualTo("thirdBlankAnswer")])
+    forthBlank = StringField('Forth blank', validators=long)#,match, [EqualTo("forthBlankAnswer")])
+    fifthBlank = StringField('Fifth blank', validators=long)#,match, [EqualTo("fifthBlankAnswer")])
+
+
+
 
     submit = SubmitField('All filled in!')
 
 
 @app.route('/Test', methods=['GET', 'POST'])
 def test():
-    return render_template('testmodulespage.html')
+    return render_template('module_selection.html')
 
 @app.route('/Placeholder', methods=['GET', 'POST'])
 def placeholder():
@@ -35,7 +40,7 @@ def placeholder():
         # the bottom of the website.
         session['firstBlank'] = placeholder_form.firstBlank.data
         session['secondBlank'] = placeholder_form.secondBlank.data
- flash('User reached ???')
+        flash('User reached the modules page from activity.')
         return redirect(url_for('test'))
 
     return render_template('placeholder.html', form=placeholder_form)
