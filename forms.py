@@ -151,11 +151,6 @@ def modules():
     return render_template('module_selection.html')
 
 
-@app.route('/verse_selection')
-def verse_selection():
-    return render_template('verse_selection.html')
-
-
 @app.route('/friends')
 def friends():
     return render_template('friends.html')
@@ -213,8 +208,8 @@ def login():
     return render_template('login.html', form=login_form)
 
 
-@app.route('/verse_selection')
-def verse_selection():
+@app.route('/versesR')
+def verse_select():
 
     g.cursor.execute('SELECT * FROM bible ORDER BY book')
     results = g.cursor.fetchall()
@@ -227,7 +222,7 @@ def verse_selection():
             flash("verse does not exist")
         else:
             session['verse'] = verse[1]  # hopefully this returns the text. Might need to use index 0
-        return render_template('verse_selection.html')
+        return render_template('versesR.html')
 
     return render_template('versesR.html', form=verse_form, verses=results)
 
