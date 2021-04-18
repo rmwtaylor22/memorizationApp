@@ -6,10 +6,13 @@
 
     {% if 'firstName' in session %}
         <!-- add a profile picture when there is styling -->
-        <p>Name: {{ session.firstName }} {{ session.lastName }}</p>
-        <p>Email: {{ session.email }}</p>
-        <p>Password: {{ session.password }}</p>
-        <p>Update Information</p>
+<p><b>Profile Information</b></p>
+        <br>
+        <p><b>Name: </b>{{ session.firstName }} {{ session.lastName }}</p>
+        <p><b>Email: </b>{{ session.email }}</p>
+        <p><button type="button"><a href="/update">Update Info</a></button></p>
+        <br><br><br>
+        <p><a href="/home">Go back</a></p>
     {% else %}
         <p>Error loading session info. Please contact the app developers. <a href="/logout">Log out</a>.</p>
     {% endif %}

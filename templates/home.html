@@ -12,10 +12,11 @@
         <p><a href="/friends">Friends</a></p>
         <p><a href="/activities">Activities</a></p>
         <p><a href="/profile">Profile</a></p>
+        <p><a href="/verse_selection">Verses</a></p>
         <br>
         <p><a href="/logout">Log out</a></p>
     {% else %}
-        <p>Error loading session info. Please contact app developers. <a href="/logout">Log out</a>.</p>
+        <p>Error loading session info. Log out and try again: <a href="/logout">Log out</a>.</p>
     {% endif %}
 
 {% endblock %}

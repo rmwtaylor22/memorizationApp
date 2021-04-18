@@ -15,7 +15,6 @@
 <body>
 
 
-
 <div class="container">
 
     <div class="jumbotron jumbotron-fluid">
@@ -31,29 +30,6 @@
     {% endfor %}
 
     {% block content %}{% endblock %}
-
-
-
-    <div class="card p-4 mt-5">
-
-        <h5 class="card-title">Session Data</h5>
-
-        <div class="card-text">
-            <dl>
-                {% for key in session %}
-
-                    <dt>{{ key }}</dt>
-                    <dd>{{ session[key] }}</dd>
-
-                {% else %}
-
-                    <dt>Session empty</dt>
-
-                {% endfor %}
-            </dl>
-        </div>
-
-    </div>
 
 
 </div>
