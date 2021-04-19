@@ -146,9 +146,16 @@ def activities():
     return render_template('activities.html')
 
 
-@app.route('/modules')
-def modules():
-    return render_template('module_selection.html')
+@app.route('/activities_base')
+def activities_base():
+    return render_template('activities_base.html')
+
+
+
+@app.route('/module_base')
+def module_base():
+    return render_template('module_base.html')
+
 
 @app.route('/friends')
 def friends():
