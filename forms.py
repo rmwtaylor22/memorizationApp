@@ -168,7 +168,13 @@ def verse_selection():
 
 @app.route('/friends')
 def friends():
-    return render_template('friends.html')
+    results=db.friends()
+    print(results)
+    return render_template('friends.html',friends=results )
+
+@app.route('/add_friend')
+def add_friend():
+    return render_template('add_friend.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
