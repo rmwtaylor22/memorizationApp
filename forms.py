@@ -151,19 +151,15 @@ def activities_base():
     return render_template('activities_base.html')
 
 
-@app.route('/modules')
-def modules():
-    return render_template('module_selection.html')
-
 
 @app.route('/module_base')
 def module_base():
     return render_template('module_base.html')
 
 
-@app.route('/verse_selection')
-def verse_selection():
-    return render_template('verse_selection.html')
+@app.route('/verse_base')
+def verse_base():
+    return render_template('verse_base.html')
 
 
 @app.route('/friends')
