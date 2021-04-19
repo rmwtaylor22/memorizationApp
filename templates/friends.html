@@ -3,18 +3,21 @@
 {% block title %}Friends{% endblock %}
 
 {% block content %}
+
+    <button style="background-color:#E0AC9D; border-color:#5C6D70; color:#ffffff" class="btn btn-secondary" onclick="document.location='/add_friend'">Add Friend</button>
     <h1>My Friends List</h1>
     <table class="table table-striped table-hover table-sm">
+
         <thead>
-        <tr>
+        <tr style="background-color:#E88873">
             <th>Name</th>
             <th>Username</th>
 
         </tr>
         </thead>
         <tbody>
-        {% for lst in friends_list %}
-            <tr>
+        {% for lst in friends %}
+            <tr style="background-color: #E0AC9D ">
                 <td>{{ lst.Name }}</td>
                 <td>{{ lst.UserName }}</td>
             </tr>
@@ -22,4 +25,5 @@
 
         </tbody>
     </table>
+
 {% endblock %}
