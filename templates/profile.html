@@ -3,10 +3,14 @@
 {% block title %}Profile Page{% endblock %}
 
 {% block content %}
+        <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Profile</h1>
+    </div>
+
 
     {% if 'firstName' in session %}
         <!-- add a profile picture when there is styling -->
-<p><b>Profile Information</b></p>
+    <p><b>Profile Information</b></p>
         <br>
         <p><b>Name: </b>{{ session.firstName }} {{ session.lastName }}</p>
         <p><b>Email: </b>{{ session.email }}</p>
