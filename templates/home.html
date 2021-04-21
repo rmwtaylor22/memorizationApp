@@ -33,10 +33,11 @@
         <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/friends'">Friends</button></p>
         <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/activities'">Activities</button></p>
         <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/profile'">Profile</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/versesR'">Verses</button></p>
         <br>
         <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/logout'">Logout</button></p>
     {% else %}
-        <p>Error loading session info. Please contact app developers. <a href="/logout">Log out</a>.</p>
+        <p>Error loading session info. Please contact app developers. <button type="button" class="btn btn-outline-secondary btn-second" onclick="document.location='/logout'">Logout</button></p>
     {% endif %}
 
 {% endblock %}
