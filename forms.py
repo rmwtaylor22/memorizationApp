@@ -239,7 +239,7 @@ def verse_select():
     return render_template('versesR.html', form=verse_form, verses=results)
 
 
-@app.route('/module_selection')
+@app.route('/modules')
 def module_selection():
     return render_template('module_selection.html')
 
