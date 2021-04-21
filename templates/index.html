@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
     {% if 'email' in session %}
         <p>Logged in as {{ session.email }}; <a href="/logout">log out</a>.</p>
     {% else %}
