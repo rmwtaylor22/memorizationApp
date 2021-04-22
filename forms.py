@@ -156,6 +156,10 @@ def activities_base():
 def module_base():
     return render_template('module_base.html')
 
+@app.route('/leaderboard')
+def leaderboard():
+    return render_template('leaderboard.html')
+
 
 @app.route('/friends')
 def friends():

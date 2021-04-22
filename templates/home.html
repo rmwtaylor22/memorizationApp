@@ -25,8 +25,6 @@
         <p class="text-center" style="font-family: 'Oswald'">Team PIKA</p>
     </div>
 
-
-
     {% if 'firstName' in session %}
         <p>Welcome {{ session.firstName }}! What will you learn today?</p>
         <p>Current streak: 5 days</p>
@@ -36,6 +34,7 @@
         <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/activities'">Activities</button></p>
         <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/profile'">Profile</button></p>
         <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/versesR'">Verses</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/leaderboard'">Leaderboard</button></p>
         <br>
         <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/logout'">Logout</button></p>
     {% else %}
