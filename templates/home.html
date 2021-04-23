@@ -4,18 +4,41 @@
 
 {% block content %}
 
+<style>
+.btn-default
+{
+  background-color: #E88873;
+  color: #000000;
+  border-color: #E88873;
+}
+.btn-second
+{
+  background-color: #E0AC9D;
+  color: #000000;
+  border-color: #E0AC9D;
+}
+
+</style>
+
+    <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Welcome to Bible Memorizer</h1>
+        <p class="text-center" style="font-family: 'Oswald'">Team PIKA</p>
+    </div>
+
     {% if 'firstName' in session %}
         <p>Welcome {{ session.firstName }}! What will you learn today?</p>
         <p>Current streak: 5 days</p>
         <br>
-        <p><a href="/modules">Modules</a></p>
-        <p><a href="/friends">Friends</a></p>
-        <p><a href="/activities">Activities</a></p>
-        <p><a href="/profile">Profile</a></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/modules'">Modules</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/friends'">Friends</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/activities'">Activities</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/profile'">Profile</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-default" onclick="document.location='/versesR'">Verses</button></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-block btn-second" onclick="document.location='/leaderboard'">Leaderboard</button></p>
         <br>
-        <p><a href="/logout">Log out</a></p>
+        <p><button type="button" class="btn btn-outline-secondary" onclick="document.location='/logout'">Logout</button></p>
     {% else %}
-        <p>Error loading session info. Please contact app developers. <a href="/logout">Log out</a>.</p>
+        <p>Error loading session info. Please contact app developers. <button type="button" class="btn btn-outline-secondary btn-second" onclick="document.location='/logout'">Logout</button></p>
     {% endif %}
 
 {% endblock %}

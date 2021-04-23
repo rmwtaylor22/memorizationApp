@@ -1,0 +1,21 @@
+@import "forms.py";
+
+colors {
+    --base1: #484A47;
+    --base2: #5C6D70;
+    --accent1: #A3774;
+    --accent2: #E88873;
+    --accent3: #E0AC9D;
+}
+
+body {
+  background-color: base1;
+}
+
+head {
+  color: base2;
+}
+
+h2 {
+    color: accent1;
+}

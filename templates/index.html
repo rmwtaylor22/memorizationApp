@@ -4,12 +4,19 @@
 
 {% block content %}
 
+    <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Welcome to Bible Memorizer</h1>
+        <p class="text-center" style="font-family: 'Oswald'">Team PIKA</p>
+    </div>
+
+
+
     {% if 'email' in session %}
-        <p>Logged in as {{ session.email }}; <a href="/logout">log out</a>.</p>
+        <p>Logged in as {{ session.email }}; <button type="button" class="btn btn-outline-secondary" onclick="document.location='/logout'">Log out</button></p>
     {% else %}
-        <p>New User? <a href="/register">Register here</a>.</p>
-        <p>Already a member? <a href="/login">Log in</a>.</p>
-        <p>Click here for the Placeholder. <a href="/Placeholder">Click this!</a> </p>
+        <p>New User? <button type="button" class="btn btn-outline-secondary btn-default" onclick="document.location='/register'">Register here</button></p>
+        <p>Already a member? <button type="button" class="btn btn-outline-secondary btn-default" onclick="document.location='/login'">Log in</button></p>
     {% endif %}
+
 
 {% endblock %}

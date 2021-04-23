@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Verses you've been learning{% endblock %}
+
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Verses</h1>
+    </div>
+
+    <h1>Collected Verses</h1>
+
+    {% for verse in verses %}
+            <p><strong>{{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}</strong></p>
+            <p>{{ verse.text }}</p>
+            <br>
+        {% else %}
+            <tr>
+                <td colspan="3">No verses</td>
+            </tr>
+        {%  endfor %}
+
+    {% if form.errors %}
+
+        <div class="alert alert-danger">
+        <strong>Problem/s:</strong>
+
+        <ul>
+        {% for field in form.errors %}
+
+                {% for problem in form.errors[field] %}
+                     <li>{{ problem }}</li>
+                {% endfor %}
+
+        {% endfor %}
+        </ul>
+
+        </div>
+    {% endif %}
+    <!-- Display verses in Bible table -->
+    <h2>Add a verse?</h2>
+    <form method="POST">
+
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+        {{ form.book.label }}
+        {{ form.book(class_='form-control') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.chapter.label }}
+        {{ form.chapter(class_='form-control') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.verse.label }}
+        {{ form.verse(class_='form-control') }}
+    </div>
+
+    {{ form.submit(class_="btn btn-primary") }}
+
+    </form>
+
+    <br><br>
+    <h2>Popular Verses:</h2><br>
+
+    <div class="container marketing">
+
+    <div class="row">
+    <div class="col-lg-3">
+        <h3>John 3:16</h3>
+        <p>
+            "For God so loved the world, that he gave his only begotten Son, that whosoever believes in him should not perish, but have everlasting life."
+        </p>
+        <p>
+            <button class="btn btn-secondary" onclick="document.location='verse_base.html'">Add me!</button>
+        </p>
+    </div>
+    <div class="col-lg-3">
+        <h3>Matthew 6:33</h3>
+        <p>
+            "But seek first the kingdom of God and His righteousness, and all these things shall be added to you."
+        </p>
+        <p>
+            <button class="btn btn-secondary" onclick="document.location='verse_base.html'">Add me!</button>
+        </p>
+    </div>
+    <div class="col-lg-3">
+        <h3>Numbers 6:24-26</h3>
+        <p>
+            "The Lord bless you and keep you; The Lord make His face shine upon you, And be gracious to you; The Lord lift up His countenance upon you, And give you peace."
+        </p>
+        <p>
+            <button class="btn btn-secondary" onclick="document.location='verse_base.html'">Add me!</button>
+        </p>
+    </div>
+    </div>
+    </div>
+
+    <br><br><br>
+
+    <p><button type="button" class="btn btn-outline-secondary btn-second" onclick="document.location='/home'">Go Back</button></p>
+
+{% endblock %}

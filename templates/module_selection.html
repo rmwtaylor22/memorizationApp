@@ -3,68 +3,58 @@
 {% block title %}Module Selection{% endblock %}
 
 {% block content %}
+<style>
+.btn-default
+{
+  background-color: #4c4c53;
+  color:#FFF;
+  border-color: #2F3E48;
+}
 
-    <h1>Current Modules:</h1>
-    <div class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-        aria-valuemin="0" aria-valuemax="100" style="width:40%">
-        40% Complete (danger)
-      </div>
+</style>
 
-      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-        aria-valuemin="0" aria-valuemax="100" style="width:30%">
-        50% Complete (warning)
-      </div>
-
-      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-        aria-valuemin="0" aria-valuemax="100" style="width:10%">
-        60% Complete (info)
-      </div>
-
-      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
-        aria-valuemin="0" aria-valuemax="100" style="width:20%">
-        70% Complete (success)
-      </div>
+    <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Modules</h1>
     </div>
 
     <div class="album py-5 bg-light">
+    <h1>Current Module:</h1>
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
-
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#A37774"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
             <div class="card-body">
               <p class="card-text">A little summary.</p>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-left">
                 <div class="btn-group">
-                  <button class="btn btn-secondary" onclick="document.location='verse_base.html'">Continue</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Start over</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.location='/module_base'">Continue</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary btn-default" onclick="document.location='/module_base'">Start over</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+       </div>
       </div>
-    </div>
+      </div>
 
+
+
+    <div class="album py-5 bg-light">
     <h1>Popular Modules:</h1>
-
-    <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
-
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#E0AC9D"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
             <div class="card-body">
               <p class="card-text">A little summary.</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-secondary" onclick="document.location='verse_base.html'">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Save for Later</button>
+               <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.location='/module_base'">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary btn btn-default" onclick="document.location='/module_base'">Save for Later</button>
                 </div>
               </div>
             </div>
@@ -72,14 +62,13 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
-
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#E88873"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
             <div class="card-body">
               <p class="card-text">A little summary.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button class="btn btn-secondary" onclick="document.location='verse_base.html'">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Save for Later</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.location='/module_base'">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary btn btn-default" onclick="document.location='/module_base'">Save for Later</button>
                 </div>
               </div>
             </div>
@@ -87,22 +76,21 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
-
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#5C6D70"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Module</text></svg>
             <div class="card-body">
               <p class="card-text">A little summary.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button class="btn btn-secondary" onclick="document.location='verse_base.html'">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Save for Later</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.location='/module_base'">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary btn btn-default" onclick="document.location='/module_base'">Save for Later</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+       </div>
       </div>
     </div>
-    </div>
+
 
 {% endblock %}
-

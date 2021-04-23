@@ -4,6 +4,11 @@
 
 {% block content %}
 
+    <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Confirmation</h1>
+    </div>
+
+
     {% if 'email' in session %}
         <p>Logged in as {{ session.email }}; <a href="/logout">Log out</a>.</p>
         <p>Congrats, you're registered to Pika! Now you can start Bible memorizing!</p>

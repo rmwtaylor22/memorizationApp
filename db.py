@@ -14,6 +14,12 @@ def close_db_connection():
     g.cursor.close()
     g.connection.close()
 
+def friends():
+    query = """
+    SELECT * FROM friends_list
+        """
+    g.cursor.execute(query)
+    return g.cursor.fetchall()
 
 def find_member(memberEmail):
     query = """
@@ -59,6 +65,7 @@ def update(memberEmail, fn, ln, psw):
     g.connection.commit()
     return g.cursor.rowcount
 
+
 # Went to the following link for SQL update examples
 # https://www.zentut.com/sql-tutorial/sql-update/#:~:text=%20To%20update%20data%20in%20a%20table%2C%20you,optional.%20If%20you%20omit%20the%20WHERE...%20More%20
 #
@@ -69,3 +76,22 @@ def update(memberEmail, fn, ln, psw):
 # WHERE condition;
 
 # https://www.w3schools.com/SQL/sql_update.asp
+
+def find_verse(bk, chtr, vs):
+    query = """
+        SELECT text
+        FROM bible
+        WHERE book = %(bkParam)s and chapter = %(chtr)s and verse = %(vs)s
+        """
+    g.cursor.execute(query, {'bkParam': bk, 'chParam': chtr, 'vsParam': vs})
+    return g.cursor.fetchone()
+
+
+def matchPassword(em, pw):
+    query = """
+        SELECT email, password
+        FROM member
+        WHERE email = %(emParam)s and password = %(pwParam)s
+    """
+    g.cursor.execute(query, {'emParam': em, 'pwParam': pw})
+    return g.cursor.fetchone()
