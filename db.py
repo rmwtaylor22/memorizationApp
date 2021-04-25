@@ -14,6 +14,7 @@ def close_db_connection():
     g.cursor.close()
     g.connection.close()
 
+
 def friends():
     query = """
     SELECT * FROM friends_list
@@ -21,10 +22,11 @@ def friends():
     g.cursor.execute(query)
     return g.cursor.fetchall()
 
+
 def find_member(memberEmail):
     query = """
-    SELECT email, first_name, last_name, password
-    FROM team.member
+    SELECT email, first_name, last_name, password, member_id
+    FROM public.member
     WHERE email = %(emailParam)s
     """
     g.cursor.execute(query, {'emailParam': memberEmail})
@@ -95,3 +97,16 @@ def matchPassword(em, pw):
     """
     g.cursor.execute(query, {'emParam': em, 'pwParam': pw})
     return g.cursor.fetchone()
+
+
+def getVerses(member_id):
+    query = """
+    SELECT *
+    FROM pika.public.member
+    INNER JOIN pika.public.member_verse as mv on member.member_id = mv.member_id
+    INNER JOIN bible b on b.id = mv.bible_id
+    WHERE member.member_id = %(mid)s
+    ORDER BY book
+    """
+    g.cursor.execute(query, {'mid': member_id})
+    return g.cursor.fetchall()
