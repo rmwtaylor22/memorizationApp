@@ -76,14 +76,9 @@ class VerseForm(FlaskForm):
         'Book',
         [DataRequired()],
         choices=[
-            ('gen', 'Genesis'),
-            ('exo', 'Exodus'),
-            ('lev', 'Leviticus'),
-            ('num', 'Numbers'),
-            ('due', 'Deuteronomy'),
-            ('jos', 'Joshua'),
-            ('rom', 'Romans'),
-            ('1cor', '1 Corinthians')
+            ('Genesis', 'Genesis'),
+            ('Psalm', 'Psalm'),
+            ('John', 'John')
         ]
     )
 
@@ -91,16 +86,7 @@ class VerseForm(FlaskForm):
         'Chapter',
         [DataRequired()],
         choices=[
-            ('.1', '1'),
-            ('.2', '2'),
-            ('.3', '3'),
-            ('.4', '4'),
-            ('.5', '5'),
-            ('.6', '6'),
-            ('.7', '7'),
-            ('.8', '8'),
-            ('.9', '9'),
-            ('.10', '10')
+            ('.1', '1')
         ]
     )
 
@@ -110,35 +96,7 @@ class VerseForm(FlaskForm):
         choices=[
             ('.1', '1'),
             ('.2', '2'),
-            ('.3', '3'),
-            ('.4', '4'),
-            ('.5', '5'),
-            ('.6', '6'),
-            ('.7', '7'),
-            ('.8', '8'),
-            ('.9', '9'),
-            ('.10', '10'),
-            ('.11', '11'),
-            ('.12', '12'),
-            ('.13', '13'),
-            ('.14', '14'),
-            ('.15', '15'),
-            ('.16', '16'),
-            ('.17', '17'),
-            ('.18', '18'),
-            ('.19', '19'),
-            ('.20', '20'),
-            ('.21', '21'),
-            ('.22', '22'),
-            ('.23', '23'),
-            ('.24', '24'),
-            ('.25', '25'),
-            ('.26', '26'),
-            ('.27', '27'),
-            ('.28', '28'),
-            ('.29', '29'),
-            ('.30', '30'),
-            ('.31', '31')
+            ('.3', '3')
         ]
     )
     submit = SubmitField('Submit')
@@ -178,7 +136,10 @@ def profile():
 
 @app.route('/activities')
 def activities():
-    return render_template('activities.html')
+    g.cursor.execute('SELECT * FROM bible ORDER BY book')
+    results = g.cursor.fetchall()
+
+    return render_template('activities.html', verses=results)
 
 
 @app.route('/activities_base')
@@ -251,6 +212,7 @@ def login():
                 session['lastName'] = member[2]
                 session['email'] = member[0]
                 session['password'] = login_form.password.data
+                session['the_id'] = member[4]
             else:
                 flash("The password does not match the username".format(login_form.email.data))
 
@@ -262,8 +224,9 @@ def login():
 @app.route('/versesR')
 def verse_select():
 
-    g.cursor.execute('SELECT * FROM bible ORDER BY book')
-    results = g.cursor.fetchall()
+    results = db.getVerses(session['the_id'])
+    # g.cursor.execute('SELECT * FROM bible ORDER BY book')
+    # results = g.cursor.fetchall()
 
     verse_form = VerseForm()
     # if the info is valid
