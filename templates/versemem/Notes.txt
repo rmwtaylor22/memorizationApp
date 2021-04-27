@@ -1,0 +1,9 @@
+1.Add start/pause/quit button on the bottom
+2.Calculate score based on the guessable words
+*3.Change word color -- done
+4.Bug: Have to guess first word
+5.Add/remove random words
+*6.Missing words will be underlined
+7. Inputs: display time,number of guesses for each word,verse and reference, language, word direction(left-to-right/right-to-left), preferences/user story, 
+8.How many times correctly until mastered?
+9.Time limit instead of a counter
