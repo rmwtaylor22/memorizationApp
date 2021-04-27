@@ -313,13 +313,13 @@ function handleGuess(event){
 		startActivityButton.setAttribute("value", "Next");
 		//quitActivityButton.setAttribute("disabled", true);
 
-		perfect = score==numWordsToGuess;
+		perfect = score===numWordsToGuess;
 
 		var logSummary = {};
 		//logSummary.wordsCorrect = 
 		logSummary.percentCorrect = (100*score/numWordsToGuess).toFixed(1);
 		logSummary.clockTime = clockTime;
-		logSummary.perfect = score==numWordsToGuess;
+		logSummary.perfect = score===numWordsToGuess;
 		logSummary.reviewStartTime = reviewStartTime;
 		logSummary.reviewStopTime = reviewStopTime;
 		logSummary.activityStartTime = reviewStartTime;
