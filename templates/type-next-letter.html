@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/static/type-next-letter.css">
+    <title>Type in next letter</title>
+	<script type="text/javascript" src="/static/type-next-letter.js" defer></script>
+</head>
+<body>
+<h1>Bible Memorizer</h1>
+<div id="mainBox">
+	<h1>Type-in Letter Activity</h1>
+	<div id="topRow" class="hidden">
+	    <div class="container">
+			Guesses Left <span id="guessesLeftSpan" class="errors0">3</span>
+		</div>
+	    <div class="container">
+			Errors <span id="errorCountSpan">0</span>
+		</div>
+	    <div class="container">
+		Score <span id="scoreSpan">0</span>
+		</div>
+	    <div class="container">/</div>
+		<div class="container">
+			<span id="wordCountSpan"></span>
+		</div>
+		<div class="container">
+			(<span id="percentCorrectSpan">0%</span>)
+		</div>
+		<div class="container">
+			<span id="clockField">Clock <span id="clockSpan">0</span></span>
+		</div>
+	</div>
+	<div id="reviewDiv" class="hidden">
+		<div id="refSpan"></div><br>
+		<div id="textSpan"></div>
+	</div>
+	<div id="activity" class="hidden">
+		<div id="wordDiv"></div>
+	</div>
+	<br>
+	<input type="button" value="Review Verse" id="startReviewButton">
+	<input type="button" value="Memorize" id="startActivityButton" disabled>
+	<input type="button" value="Pause" id="activityPauseButton" disabled>
+	<input type="button" value="Quit" id="quitActivityButton" disabled>
+	<span id="activityButtonsDiv">
+		<!--
+		<input type="button" value="Quit" id="activityQuitButton" disabled>
+		-->
+	</span>
+</div>
+</body>
+</html>

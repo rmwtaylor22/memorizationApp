@@ -1,0 +1,127 @@
+#mainBox {
+	position: relative;
+    top: 0px;
+    width: 100%;
+    background-color: #aaa;
+	margin: auto;
+}
+#activity, #reviewDiv {
+	width: 99.5%;
+	border: 2px solid black;
+	min-height: 400px;
+	background-color: white;
+	font-size: 2em;
+}
+
+#mainBox h1 {
+    margin: 5px;
+}
+#wordDiv {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+.verseItemSpan {
+	margin: 0.1em;
+	margin-bottom: 0px;
+	font-size: 1.5em;
+}
+.selectedWord {
+	border: 1px solid blue;
+}
+.notGuessed {
+	opacity: 0;
+}
+.correctlyGuessed {
+	color: green;
+	opacity: 1;
+}
+.incorrectlyGuessed {
+	color: red;
+	font-weight: bold;
+	opacity: 1;
+}
+.guesses3 {
+    background-color: lightgreen;
+}
+.guesses2 {
+    background-color: yellow;
+}
+.guesses1 {
+    background-color: orange;
+}
+.guesses0 {
+    background-color: red;
+}
+.hidden {
+	display: none;
+}
+.visible {
+	display: inline-block;
+}
+#activityButtonsDiv {
+    /*position: absolute;
+    left: 0px;
+    right: 0px;
+	width: 99%;
+    bottom: 25px;
+	margin: 0px;
+    height: 25px;
+    border: solid purple 1px;
+	*/
+}
+input[type="button"] {
+	font-size: 1em;
+	border: 2px solid blue;
+	margin: 10px;
+	padding: 20px;
+	border-radius: 20px;
+	width: 20%;
+}
+
+
+/* 
+ * Got the idea for box-shadow for collapsing margins here:
+ * https://codepen.io/savehansson/pen/rsIEp
+ */
+.container {
+  /*background-color: white;*/
+  float: left; /* Makes the container height the same as its children. */
+  padding: 10px;
+  /*margin-bottom: 40px;*/
+  border-collapse: collapse;
+}
+.container div {
+  padding: 20px;
+  float: left;
+  border: 2px solid black;
+  display: table-cell;
+  /*background-color: #def;*/
+  background-color: #888;
+
+  /* And here comed the trick: */
+
+  /*
+  box-shadow: 
+    2px 0 0 0 #888, 
+    0 2px 0 0 #888, 
+    2px 2px 0 0 #888,
+    2px 0 0 0 #888 inset, 
+    0 2px 0 0 #888 inset;
+  */
+}
+
+#topRow {
+	font-size: 1.5em;
+	font-weight: bolder;
+    border: solid black 2px;
+    min-height: 40px;
+/*
+	min-width: 95%;
+    background-color: #ddd;
+*/
+}
+.container span {
+    background-color: white;
+	margin: 2px;
+	padding: 2px;
+}

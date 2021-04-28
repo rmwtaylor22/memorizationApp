@@ -117,6 +117,14 @@ def activities_base():
 def module_base():
     return render_template('module_base.html')
 
+@app.route('/type-next-letter')
+def type_next_letter():
+    return render_template('type-next-letter.html')
+
+@app.route('/type-next-letter2')
+def type_next_letter2():
+    return render_template('type-next-letter2.html')
+
 @app.route('/leaderboard')
 def leaderboard():
     return render_template('leaderboard.html')
