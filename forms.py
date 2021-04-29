@@ -260,4 +260,13 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/current_module')
+def current_module():
+
+    results = db.getVerses(session['the_id'])
+
+
+    return render_template('module_display.html', verses=results)
+
+
 app.run(debug=True)
