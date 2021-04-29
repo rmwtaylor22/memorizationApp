@@ -51,7 +51,7 @@ class VerseForm(FlaskForm):
         'Chapter',
         [DataRequired()],
         choices=[
-            ('.1', '1')
+            ('1', '1')
         ]
     )
 
@@ -59,9 +59,9 @@ class VerseForm(FlaskForm):
         'Verse',
         [DataRequired()],
         choices=[
-            ('.1', '1'),
-            ('.2', '2'),
-            ('.3', '3')
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3')
         ]
     )
     submit = SubmitField('Submit')
@@ -126,7 +126,7 @@ def leaderboard():
 def friends():
     results=db.friends()
     print(results)
-    return render_template('friends.html',friends=results )
+    return render_template('friends.html', friends=results)
 
 @app.route('/add_friend')
 def add_friend():
@@ -186,7 +186,7 @@ def login():
     return render_template('login.html', form=login_form)
 
 
-@app.route('/versesR')
+@app.route('/versesR', methods=['GET', 'POST'])
 def verse_select():
 
     results = db.getVerses(session['the_id'])
@@ -196,14 +196,27 @@ def verse_select():
     verse_form = VerseForm()
     # if the info is valid
     if verse_form.validate_on_submit():
-        verse = db.find_verse(verse_form.book.data, verse_form.chapter.data, verse_form.verse.data)
-        if verse is None:
+        id = db.find_verse_id(verse_form.book.data, verse_form.chapter.data, verse_form.verse.data)
+        if id[0] is None:
             flash("verse does not exist")
         else:
-            session['verse'] = verse[1]  # hopefully this returns the text. Might need to use index 0
-        return render_template('versesR.html')
+            member_verse = db.find_member_verse(session['the_id'], id[0])
+            if member_verse is not None:
+                flash("Verse already added!")
+            else:
+                db.add_verse(session['the_id'], id[0])
+                flash("New verse added!")
+
+        return redirect(url_for('member_verse'))
 
     return render_template('versesR.html', form=verse_form, verses=results)
+
+
+@app.route('/member_verse')
+def member_verse():
+    results = db.getVerses(session['the_id'])
+
+    return render_template('verse_base.html', verses=results)
 
 
 @app.route('/modules')
@@ -251,5 +264,5 @@ def logout():
     flash('Logged out')
     return redirect(url_for('index'))
 
-
 app.run(debug=True)
+
