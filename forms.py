@@ -9,6 +9,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key for session application'
 
 
+class FriendForm(FlaskForm):
+    name = StringField('Friends Name', validators=[Length(min=1, max=60)])
+    username = StringField('Friends Username', validators=[Length(min=1, max=60)])
+    submit = SubmitField('Add Friend')
+
 class RegisterForm(FlaskForm):
     valid_pword = []
     valid_pword.append(Length(min=8))
@@ -112,7 +117,6 @@ def activities_base():
     return render_template('activities_base.html')
 
 
-
 @app.route('/module_base')
 def module_base():
     return render_template('module_base.html')
@@ -129,16 +133,20 @@ def type_next_letter2():
 def leaderboard():
     return render_template('leaderboard.html')
 
-
 @app.route('/friends')
 def friends():
     results=db.friends()
     print(results)
     return render_template('friends.html', friends=results)
 
-@app.route('/add_friend')
-def add_friend():
-    return render_template('add_friend.html')
+@app.route('/add_friends', methods=['GET', 'POST'])
+def add_friends():
+    add_friend = FriendForm()
+    if add_friend.validate_on_submit():
+        db.add_friends(add_friend.name.data, add_friend.username.data)
+        flash('Friend added successfully')
+        return redirect(url_for('friends'))
+    return render_template('add_friends.html', form=add_friend)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -273,4 +281,3 @@ def logout():
     return redirect(url_for('index'))
 
 app.run(debug=True)
-
