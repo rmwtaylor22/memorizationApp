@@ -1603,7 +1603,7 @@ true posixrules
     <database id="50" parent="1" name="pika">
       <ObjectId>20720</ObjectId>
       <Owner>pikateam</Owner>
-      <IntrospectionStateNumber>12665</IntrospectionStateNumber>
+      <IntrospectionStateNumber>13225</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|24769|23954|8
 sequence|table|24813|24704|6
@@ -2103,7 +2103,7 @@ sequence|table|24845|24704|9
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>12666</IntrospectionStateNumber>
+      <IntrospectionStateNumber>13226</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <schema id="176" parent="50" name="team">
@@ -2180,27 +2180,26 @@ sequence|table|24845|24704|9
     <language id="188" parent="50" name="sql"/>
     <sequence id="189" parent="175" name="bible_id_seq">
       <ObjectId>24813</ObjectId>
-      <Owner>rwhite</Owner>
-      <StateNumber>12393</StateNumber>
+      <Owner>pikateam</Owner>
+      <StateNumber>12674</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="190" parent="175" name="bible_percent_seq">
       <ObjectId>24845</ObjectId>
-      <Owner>rwhite</Owner>
-      <StateNumber>12418</StateNumber>
+      <Owner>pikateam</Owner>
+      <StateNumber>12674</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="191" parent="175" name="member_member_id_seq">
       <ObjectId>24769</ObjectId>
-      <Owner>rwhite</Owner>
-      <StateNumber>12366</StateNumber>
+      <Owner>pikateam</Owner>
+      <StateNumber>12678</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="192" parent="175" name="bible">
       <ObjectId>24704</ObjectId>
-      <Outdated>1</Outdated>
-      <Owner>rwhite</Owner>
-      <StateNumber>12418</StateNumber>
+      <Owner>pikateam</Owner>
+      <StateNumber>12674</StateNumber>
     </table>
     <table id="193" parent="175" name="friends_list">
       <ObjectId>23866</ObjectId>
@@ -2215,15 +2214,13 @@ sequence|table|24845|24704|9
     <table id="195" parent="175" name="member">
       <ObjectId>23954</ObjectId>
       <Comment>System user</Comment>
-      <Outdated>1</Outdated>
-      <Owner>rwhite</Owner>
-      <StateNumber>12389</StateNumber>
+      <Owner>pikateam</Owner>
+      <StateNumber>12678</StateNumber>
     </table>
     <table id="196" parent="175" name="member_verse">
       <ObjectId>24794</ObjectId>
-      <Outdated>1</Outdated>
-      <Owner>rwhite</Owner>
-      <StateNumber>12389</StateNumber>
+      <Owner>pikateam</Owner>
+      <StateNumber>12682</StateNumber>
     </table>
     <column id="197" parent="192" name="book">
       <Position>2</Position>
@@ -2267,13 +2264,13 @@ sequence|table|24845|24704|9
     </column>
     <index id="203" parent="192" name="bible_id_uindex">
       <ObjectId>24819</ObjectId>
-      <StateNumber>12418</StateNumber>
+      <StateNumber>12674</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <index id="204" parent="192" name="bible_pk">
       <ObjectId>24820</ObjectId>
-      <StateNumber>12418</StateNumber>
+      <StateNumber>12674</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -2285,24 +2282,24 @@ sequence|table|24845|24704|9
       <Primary>1</Primary>
       <UnderlyingIndexName>bible_pk</UnderlyingIndexName>
     </key>
-    <column id="206" parent="193" name="Name">
+    <column id="206" parent="193" name="name">
       <Position>1</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>11167</StateNumber>
+      <StateNumber>13201</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="207" parent="193" name="UserName">
+    <column id="207" parent="193" name="username">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>11175</StateNumber>
+      <StateNumber>13198</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="208" parent="193" name="ActiveStatus">
+    <column id="208" parent="193" name="activestatus">
       <Position>3</Position>
       <DataType>boolean|0s</DataType>
-      <StateNumber>12492</StateNumber>
+      <StateNumber>13204</StateNumber>
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
@@ -2358,13 +2355,13 @@ sequence|table|24845|24704|9
     </column>
     <index id="217" parent="195" name="member_member_id_uindex">
       <ObjectId>24775</ObjectId>
-      <StateNumber>12367</StateNumber>
+      <StateNumber>12678</StateNumber>
       <ColNames>member_id</ColNames>
       <Unique>1</Unique>
     </index>
     <index id="218" parent="195" name="member_pk">
       <ObjectId>24776</ObjectId>
-      <StateNumber>12368</StateNumber>
+      <StateNumber>12678</StateNumber>
       <ColNames>member_id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -2400,7 +2397,7 @@ sequence|table|24845|24704|9
     </column>
     <index id="223" parent="196" name="the_member_verse">
       <ObjectId>24801</ObjectId>
-      <StateNumber>12389</StateNumber>
+      <StateNumber>12682</StateNumber>
       <ColNames>member_id
 bible_id</ColNames>
       <Unique>1</Unique>

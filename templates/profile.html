@@ -17,7 +17,7 @@
         <p><b>Email: </b>{{ session.email }}</p>
         <p><button type="button" class="btn btn-outline-secondary btn-second" onclick="document.location='/update'">Update Info</button></p>
         <br><br><br>
-        <p><a href="/home">Go back</a></p>
+        <p><button type="button" class="btn btn-outline-secondary btn-second" onclick="document.location='/home'">Go Back</button></p>
     {% else %}
         <p>Error loading session info. Please contact the app developers. <a href="/logout">Log out</a>.</p>
     {% endif %}
