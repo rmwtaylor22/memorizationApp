@@ -9,7 +9,7 @@
     </div>
 
 
-    <button style="background-color:#E0AC9D; border-color:#5C6D70; color:#ffffff" class="btn btn-secondary" onclick="document.location='/add_friend'">Add Friend</button>
+    <button style="background-color:#E0AC9D; border-color:#5C6D70; color:#ffffff" class="btn btn-secondary" onclick="document.location='/add_friends'">Add Friend</button>
     <h1>My Friends List</h1>
     <table class="table table-striped table-hover table-sm">
 
@@ -23,8 +23,8 @@
         <tbody>
         {% for lst in friends %}
             <tr style="background-color: #E0AC9D ">
-                <td>{{ lst.Name }}</td>
-                <td>{{ lst.UserName }}</td>
+                <td>{{ lst.name }}</td>
+                <td>{{ lst.username }}</td>
             </tr>
         {%  endfor %}
 
