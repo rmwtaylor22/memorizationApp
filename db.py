@@ -15,10 +15,18 @@ def close_db_connection():
     g.connection.close()
 
 
+def friends():
+    query = """
+    SELECT * FROM friends_list
+        """
+    g.cursor.execute(query)
+    return g.cursor.fetchall()
+
+
 def find_member(memberEmail):
     query = """
-    SELECT email, first_name, last_name, password
-    FROM team.member
+    SELECT email, first_name, last_name, password, member_id
+    FROM public.member
     WHERE email = %(emailParam)s
     """
     g.cursor.execute(query, {'emailParam': memberEmail})
@@ -88,15 +96,6 @@ def add_friends(name, username):
 
 # https://www.w3schools.com/SQL/sql_update.asp
 
-def find_verse(bk, chtr, vs):
-    query = """
-        SELECT text
-        FROM bible
-        WHERE book = %(bkParam)s and chapter = %(chtr)s and verse = %(vs)s
-        """
-    g.cursor.execute(query, {'bkParam': bk, 'chParam': chtr, 'vsParam': vs})
-    return g.cursor.fetchone()
-
 
 def matchPassword(em, pw):
     query = """
@@ -105,4 +104,58 @@ def matchPassword(em, pw):
         WHERE email = %(emParam)s and password = %(pwParam)s
     """
     g.cursor.execute(query, {'emParam': em, 'pwParam': pw})
+    return g.cursor.fetchone()
+
+
+def getVerses(member_id):
+    query = """
+    SELECT *
+    FROM pika.public.member
+    INNER JOIN pika.public.member_verse as mv on member.member_id = mv.member_id
+    INNER JOIN bible b on b.id = mv.bible_id
+    WHERE member.member_id = %(mid)s
+    ORDER BY book
+    """
+    g.cursor.execute(query, {'mid': member_id})
+    return g.cursor.fetchall()
+
+
+def add_verse(member_id, bible_id):
+    query = '''
+    INSERT INTO member_verse (member_id, bible_id, amount)
+    VALUES (%(mid)s, %(bid)s, %(amount)s)
+    '''
+
+    g.cursor.execute(query, {'mid': member_id, 'bid': bible_id, 'amount': 1})
+    g.connection.commit()
+    return g.cursor.rowcount
+
+
+def find_verse_id(bk, ch, vs):
+    query = """
+        SELECT id
+        FROM bible
+        WHERE book = %(bkParam)s and chapter = %(chParam)s and verse = %(vsParam)s
+        """
+    g.cursor.execute(query, {'bkParam': bk, 'chParam': ch, 'vsParam': vs})
+    return g.cursor.fetchone()
+
+
+def find_verse(bk, chtr, vs):
+    query = """
+        SELECT text
+        FROM bible
+        WHERE book = %(bkParam)s and chapter = %(chParam)s and verse = %(vsParam)s
+        """
+    g.cursor.execute(query, {'bkParam': bk, 'chParam': chtr, 'vsParam': vs})
+    return g.cursor.fetchone()
+
+
+def find_member_verse(member_id, bible_id):
+    query = """
+    SELECT member_id, bible_id
+    FROM member_verse
+    WHERE member_id = %(mid)s and bible_id = %(bid)s 
+    """
+    g.cursor.execute(query, {'mid': member_id, 'bid': bible_id})
     return g.cursor.fetchone()
