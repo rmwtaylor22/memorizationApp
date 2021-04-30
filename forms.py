@@ -8,42 +8,12 @@ import db  # if error, right-click parent directory "mark directory as" "sources
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key for session application'
 
-class Placeholder(FlaskForm):
-    long = []
-    long.append(Length(min=3))
-    match=[]
-    match.append(Regexp(r'.*[A-Za-z]')) #add more validators here.
-    #firstBlankAnswer=this needs to be connected to the database's verse blank that gets pulled in to the activity.
-    firstBlank= StringField('First blank', validators=long)#, match, [EqualTo("firstBlankAnswer")])
-    secondBlank = StringField('Second blank', validators=long)#,match,[EqualTo("secondBlankAnswer")])
-    thirdBlank = StringField('Third blank', validators=long)#,match, [EqualTo("thirdBlankAnswer")])
-    forthBlank = StringField('Forth blank', validators=long)#,match, [EqualTo("forthBlankAnswer")])
-    fifthBlank = StringField('Fifth blank', validators=long)#,match, [EqualTo("fifthBlankAnswer")])
 
+class FriendForm(FlaskForm):
+    name = StringField('Friends Name', validators=[Length(min=1, max=60)])
+    username = StringField('Friends Username', validators=[Length(min=1, max=60)])
+    submit = SubmitField('Add Friend')
 
-
-
-    submit = SubmitField('All filled in!')
-
-
-@app.route('/Test', methods=['GET', 'POST'])
-def test():
-    return render_template('module_selection.html')
-
-@app.route('/Placeholder', methods=['GET', 'POST'])
-def placeholder():
-    placeholder_form = Placeholder()
-
-    if placeholder_form.validate_on_submit():
-        # this is supposed to send the information in the forms to
-        # the database right now it is displaying the information at
-        # the bottom of the website.
-        session['firstBlank'] = placeholder_form.firstBlank.data
-        session['secondBlank'] = placeholder_form.secondBlank.data
-        flash('User reached the modules page from activity.')
-        return redirect(url_for('test'))
-
-    return render_template('placeholder.html', form=placeholder_form)
 class RegisterForm(FlaskForm):
     valid_pword = []
     valid_pword.append(Length(min=8))
@@ -147,7 +117,6 @@ def activities_base():
     return render_template('activities_base.html')
 
 
-
 @app.route('/module_base')
 def module_base():
     return render_template('module_base.html')
@@ -164,16 +133,20 @@ def type_next_letter2():
 def leaderboard():
     return render_template('leaderboard.html')
 
-
 @app.route('/friends')
 def friends():
     results=db.friends()
     print(results)
     return render_template('friends.html', friends=results)
 
-@app.route('/add_friend')
-def add_friend():
-    return render_template('add_friend.html')
+@app.route('/add_friends', methods=['GET', 'POST'])
+def add_friends():
+    add_friend = FriendForm()
+    if add_friend.validate_on_submit():
+        db.add_friends(add_friend.name.data, add_friend.username.data)
+        flash('Friend added successfully')
+        return redirect(url_for('friends'))
+    return render_template('add_friends.html', form=add_friend)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -308,4 +281,3 @@ def logout():
     return redirect(url_for('index'))
 
 app.run(debug=True)
-

@@ -67,6 +67,23 @@ def update(memberEmail, fn, ln, psw):
     g.connection.commit()
     return g.cursor.rowcount
 
+def friends():
+    query = """
+    SELECT * FROM friends_list
+        """
+    g.cursor.execute(query)
+    return g.cursor.fetchall()
+
+
+def add_friends(name, username):
+
+    query = '''
+    INSERT INTO friends_list (name, username, activestatus)
+    VALUES (%(n)s, %(u)s, %(a)s)
+    '''
+    g.cursor.execute(query, {'n': name, 'u': username, 'a': True})
+    g.connection.commit()
+    return g.cursor.rowcount
 
 # Went to the following link for SQL update examples
 # https://www.zentut.com/sql-tutorial/sql-update/#:~:text=%20To%20update%20data%20in%20a%20table%2C%20you,optional.%20If%20you%20omit%20the%20WHERE...%20More%20
