@@ -79,15 +79,6 @@ def update(memberEmail, fn, ln, psw):
 
 # https://www.w3schools.com/SQL/sql_update.asp
 
-def find_verse(bk, chtr, vs):
-    query = """
-        SELECT text
-        FROM bible
-        WHERE book = %(bkParam)s and chapter = %(chtr)s and verse = %(vs)s
-        """
-    g.cursor.execute(query, {'bkParam': bk, 'chParam': chtr, 'vsParam': vs})
-    return g.cursor.fetchone()
-
 
 def matchPassword(em, pw):
     query = """
@@ -110,3 +101,44 @@ def getVerses(member_id):
     """
     g.cursor.execute(query, {'mid': member_id})
     return g.cursor.fetchall()
+
+
+def add_verse(member_id, bible_id):
+    query = '''
+    INSERT INTO member_verse (member_id, bible_id, amount)
+    VALUES (%(mid)s, %(bid)s, %(amount)s)
+    '''
+
+    g.cursor.execute(query, {'mid': member_id, 'bid': bible_id, 'amount': 1})
+    g.connection.commit()
+    return g.cursor.rowcount
+
+
+def find_verse_id(bk, ch, vs):
+    query = """
+        SELECT id
+        FROM bible
+        WHERE book = %(bkParam)s and chapter = %(chParam)s and verse = %(vsParam)s
+        """
+    g.cursor.execute(query, {'bkParam': bk, 'chParam': ch, 'vsParam': vs})
+    return g.cursor.fetchone()
+
+
+def find_verse(bk, chtr, vs):
+    query = """
+        SELECT text
+        FROM bible
+        WHERE book = %(bkParam)s and chapter = %(chParam)s and verse = %(vsParam)s
+        """
+    g.cursor.execute(query, {'bkParam': bk, 'chParam': chtr, 'vsParam': vs})
+    return g.cursor.fetchone()
+
+
+def find_member_verse(member_id, bible_id):
+    query = """
+    SELECT member_id, bible_id
+    FROM member_verse
+    WHERE member_id = %(mid)s and bible_id = %(bid)s 
+    """
+    g.cursor.execute(query, {'mid': member_id, 'bid': bible_id})
+    return g.cursor.fetchone()

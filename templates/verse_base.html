@@ -1,4 +1,4 @@
-{% extends 'verse_selection.html' %}
+{% extends 'versesR.html' %}
 
 {% block title %}Verse page{% endblock %}
 
@@ -8,17 +8,16 @@
         <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Verses</h1>
     </div>
 
+    <h1>Collected Verses</h1>
 
-    <div class="row">
-    <div class="col-lg-1">
-        <h2>Verse 1</h2>
-        <p>
-            "John 3:16"
-        </p>
-        <p>
-             "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."
-        </p>
-    </div>
-    </div>
+    {% for verse in verses %}
+            <p><strong>{{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}</strong></p>
+            <p>{{ verse.text }}</p>
+            <br>
+        {% else %}
+            <tr>
+                <td colspan="3">No verses</td>
+            </tr>
+        {%  endfor %}
 
 {% endblock %}
