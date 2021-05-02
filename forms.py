@@ -239,6 +239,18 @@ def member_verse():
 def module_selection():
     return render_template('module_selection.html')
 
+@app.route('/psalms')
+def psalms():
+    return render_template('psalms_module.html')
+
+@app.route('/proverbs')
+def proverbs():
+    return render_template('proverbs_module.html')
+
+@app.route('/john')
+def john():
+    return render_template('john_module.html')
+
 
 @app.route("/update", methods=['GET', 'POST'])
 def update():
@@ -279,5 +291,14 @@ def logout():
 
     flash('Logged out')
     return redirect(url_for('index'))
+
+
+@app.route('/current_module')
+def current_module():
+
+    results = db.getVerses(session['the_id'])
+
+
+    return render_template('module_display.html', verses=results)
 
 app.run(debug=True)
