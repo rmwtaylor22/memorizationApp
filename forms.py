@@ -218,6 +218,18 @@ def verse_select():
 def module_selection():
     return render_template('module_selection.html')
 
+@app.route('/psalms')
+def psalms():
+    return render_template('psalms_module.html')
+
+@app.route('/proverbs')
+def proverbs():
+    return render_template('proverbs_module.html')
+
+@app.route('/john')
+def john():
+    return render_template('john_module.html')
+
 
 @app.route("/update", methods=['GET', 'POST'])
 def update():
