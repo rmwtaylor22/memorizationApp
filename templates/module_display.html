@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Verses you've been learning{% endblock %}
+
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid"  style ="background-color: #8eaf9d">
+        <h1 class="text-center" style="color:#FFFFFF; font-family: 'Oswald'">Verses</h1>
+    </div>
+
+    <h1>Current Module</h1>
+
+    {% for verse in verses %}
+            <p><strong>{{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}</strong></p>
+            <p>{{ verse.text }}</p>
+            <br>
+        {% else %}
+            <tr>
+                <td colspan="3">No verses</td>
+            </tr>
+        {%  endfor %}
+
+    <p><button type="button" class="btn btn-outline-secondary btn-second" onclick="document.location='/modules'">Go Back</button></p>
+
+{% endblock %}
