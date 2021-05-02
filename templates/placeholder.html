@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Placeholder{% endblock %}
+
+
+{% block content %}
+    <p>Good Job!</p>
+    {% if form.errors %}
+
+        <div class="alert alert-danger">
+        <strong>Problem/s:</strong>
+
+        <ul>
+        {% for field in form.errors %}
+
+                {% for problem in form.errors[field] %}
+                     <li>{{ problem }}</li>
+                {% endfor %}
+
+        {% endfor %}
+        </ul>
+
+        </div>
+    {% endif %}
+
+
+{{ form.csrf_token }}
+
+
+<form method="POST">
+    {{ form.csrf_token }}
+
+    <div id="text" class="form-inline">
+        <p style="display: inline">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
+        <div class="input-group" style="display: inline-block">
+            {{form.firstBlank(class_='form-inline')}}
+        </div>
+        <p style="display: inline">...incididunt ut labore et dolore magna aliqua.</p>
+        <div class="input-group" style="display: inline-block">
+            {{form.secondBlank(class_='form-inline')}}
+        </div>
+        <p style="display: inline">...incididunt ut labore et dolore magna aliqua.</p>
+        <div class="input-group" style="display: inline-block">
+            {{form.thirdBlank(class_='form-inline')}}
+        </div>
+        <p style="display: inline">...incididunt ut labore et dolore magna aliqua.</p>
+        <div class="input-group" style="display: inline-block">
+            {{form.forthBlank(class_='form-inline')}}
+        </div>
+        <p style="display: inline">...incididunt ut labore et dolore magna aliqua.</p>
+        <div class="input-group" style="display: inline-block">
+            {{form.fifthBlank(class_='form-inline')}}
+        </div>
+        <p style="display: inline">...incididunt ut labore et dolore magna aliqua.</p>
+
+        <br>
+    </div>
+
+
+    {{ form.submit(class_="btn btn-primary") }}
+
+</form>
+
+<p> This is a test to see if this works under the form</p>
+{% endblock %}
