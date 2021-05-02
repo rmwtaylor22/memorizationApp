@@ -263,11 +263,6 @@ def update():
                              update_form.lastName.data,
                              update_form.password.data)
 
-        if rowcount is None:
-            flash("Member {} updated".format(update_form.email.data))
-            return redirect(url_for('index'))
-        else:
-            flash("New member not created")
 
         # fill the session in with the details
         session['firstName'] = update_form.firstName.data
