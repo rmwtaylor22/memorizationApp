@@ -32,6 +32,25 @@ class RegisterForm(FlaskForm):
 
     submit = SubmitField('Submit')
 
+class updateForm(FlaskForm):
+    valid_pword = []
+    valid_pword.append(Length(min=8))
+    valid_pword.append(Regexp(r'.*[A-Za-z]', message="Password must have at least one letter"))
+    valid_pword.append(Regexp(r'.*[0-9]', message="Password must have at least one digit"))
+    valid_pword.append(Regexp(r'.*[!@#$%^&*_+=]', message="Password must have at least one special character"))
+
+    long = []
+    long.append(Length(min=4))
+
+    firstName = StringField('First Name', validators=long)
+    lastName = StringField('Last Name', validators=long)
+    email = StringField('Email', validators=[Email()])
+    password = PasswordField('Password', validators=valid_pword)
+    passwordCheck = PasswordField('Password confirmation', validators=[EqualTo('password')])
+
+    submit = SubmitField('Submit')
+
+
 
 class LoginForm(FlaskForm):
     valid_pword = []
@@ -254,8 +273,8 @@ def john():
 
 @app.route("/update", methods=['GET', 'POST'])
 def update():
-    update_form = RegisterForm()
 
+    update_form = updateForm()
     # if the info is valid
     if update_form.validate_on_submit():
         rowcount = db.update(update_form.email.data,
