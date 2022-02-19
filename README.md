@@ -1,2 +1,3 @@
-# pika
-# editing for the sake of seeing which pika folder we are using
+# Bible Verse Memorization App
+
+## Created by Team Pika Spring of 2021
